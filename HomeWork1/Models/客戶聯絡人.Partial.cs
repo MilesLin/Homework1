@@ -3,13 +3,27 @@ namespace HomeWork1.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+    using System.Linq;
+
     [MetadataType(typeof(客戶聯絡人MetaData))]
-    public partial class 客戶聯絡人
-    {
+    public partial class 客戶聯絡人 : IValidatableObject
+    {        
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            var db = new 客戶資料Entities();
+            var data = db.客戶資料.Find(this.客戶Id);
+
+            foreach (var item in data.客戶聯絡人)            
+            {
+                if (item.Email.Equals(this.Email))
+                {
+                    yield return new ValidationResult("電子郵件重複", new[] { "Email" });
+                }
+            }
+        }
     }
     
-    public partial class 客戶聯絡人MetaData : IValidatableObject
+    public partial class 客戶聯絡人MetaData 
     {
         [Required]
         public int Id { get; set; }
@@ -36,16 +50,6 @@ namespace HomeWork1.Models
         public string 電話 { get; set; }
     
         public virtual 客戶資料 客戶資料 { get; set; }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            foreach (var item in 客戶資料.客戶聯絡人)
-            {
-                if (item.Email.Equals(this.Email))
-                {
-                    yield return new ValidationResult("電子郵件重複", new[] { "Email" });
-                }
-            }
-        }
+        
     }
 }
