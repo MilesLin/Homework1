@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HomeWork1.Models;
+using System.Data.Entity.Validation;
 
 namespace HomeWork1.Controllers
 {
@@ -113,10 +114,28 @@ namespace HomeWork1.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
-        {
+        {            
             客戶聯絡人 客戶聯絡人 = db.客戶聯絡人.Find(id);
-            客戶聯絡人.是否刪除 = true;     
-            db.SaveChanges();
+            客戶聯絡人.是否刪除 = true;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                //throw ex;
+                var allErrors = new List<string>();
+
+                foreach (DbEntityValidationResult re in ex.EntityValidationErrors)
+                {
+                    foreach (DbValidationError err in re.ValidationErrors)
+                    {
+                        allErrors.Add(err.ErrorMessage);
+                    }
+                }
+
+                ViewBag.Errors = allErrors;
+            }
             return RedirectToAction("Index");
         }
 
