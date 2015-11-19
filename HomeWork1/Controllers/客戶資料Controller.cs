@@ -51,7 +51,7 @@ namespace HomeWork1.Controllers
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,客戶名稱,統一編號,電話,傳真,地址,Email")] 客戶資料 客戶資料)
+        public ActionResult Create([Bind(Include = "Id,客戶名稱,統一編號,電話,傳真,地址,Email,客戶分類")] 客戶資料 客戶資料)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace HomeWork1.Controllers
         {
             var data = this.Repo客戶資料.Where(x => x.Id == id).FirstOrDefault();
 
-            string[] includePropertie = { "客戶名稱", "統一編號", "電話", "傳真", "地址", "Email" };
+            string[] includePropertie = { "客戶名稱", "統一編號", "電話", "傳真", "地址", "Email", "客戶分類" };
             if (TryUpdateModel<客戶資料>(data, includePropertie))
             {
                 this.Repo客戶資料.UnitOfWork.Commit();
