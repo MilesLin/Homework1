@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -11,15 +10,13 @@ using System.Data.Entity.Validation;
 
 namespace HomeWork1.Controllers
 {
-    public class 客戶聯絡人Controller : Controller
+    public class 客戶聯絡人Controller :BaseController
     {
-        private 客戶資料Entities db = new 客戶資料Entities();
-
         // GET: 客戶聯絡人
         public ActionResult Index()
         {
-            var 客戶聯絡人 = db.客戶聯絡人.Include(客 => 客.客戶資料);
-            return View(客戶聯絡人.Where(x => !x.是否刪除).ToList());
+            var 客戶聯絡人 = this.Repo客戶聯絡人.All().Where(x => !x.是否刪除).Include("客戶資料").ToList();
+            return View(客戶聯絡人);
         }
 
         // GET: 客戶聯絡人/Details/5
@@ -29,7 +26,7 @@ namespace HomeWork1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶聯絡人 客戶聯絡人 = db.客戶聯絡人.Find(id);
+            客戶聯絡人 客戶聯絡人 = this.Repo客戶聯絡人.Where(x => x.Id == id).FirstOrDefault();
             if (客戶聯絡人 == null)
             {
                 return HttpNotFound();
@@ -40,7 +37,7 @@ namespace HomeWork1.Controllers
         // GET: 客戶聯絡人/Create
         public ActionResult Create()
         {
-            ViewBag.客戶Id = new SelectList(db.客戶資料, "Id", "客戶名稱");
+            ViewBag.客戶Id = new SelectList(this.Repo客戶資料.All(), "Id", "客戶名稱");
             return View();
         }
 
@@ -53,12 +50,12 @@ namespace HomeWork1.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.客戶聯絡人.Add(客戶聯絡人);
-                db.SaveChanges();
+                this.Repo客戶聯絡人.Add(客戶聯絡人);
+                this.Repo客戶聯絡人.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.客戶Id = new SelectList(db.客戶資料, "Id", "客戶名稱", 客戶聯絡人.客戶Id);
+            ViewBag.客戶Id = new SelectList(this.Repo客戶資料.All(), "Id", "客戶名稱", 客戶聯絡人.客戶Id);
             return View(客戶聯絡人);
         }
 
@@ -69,12 +66,13 @@ namespace HomeWork1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶聯絡人 客戶聯絡人 = db.客戶聯絡人.Find(id);
+            客戶聯絡人 客戶聯絡人 = this.Repo客戶聯絡人.Where(x => x.Id == id).FirstOrDefault();
+
             if (客戶聯絡人 == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.客戶Id = new SelectList(db.客戶資料, "Id", "客戶名稱", 客戶聯絡人.客戶Id);
+            ViewBag.客戶Id = new SelectList(this.Repo客戶資料.All(), "Id", "客戶名稱", 客戶聯絡人.客戶Id);
             return View(客戶聯絡人);
         }
 
@@ -87,11 +85,11 @@ namespace HomeWork1.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(客戶聯絡人).State = EntityState.Modified;
-                db.SaveChanges();
+                this.Repo客戶聯絡人.UnitOfWork.Context.Entry(客戶聯絡人).State = System.Data.Entity.EntityState.Modified;
+                this.Repo客戶聯絡人.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
-            ViewBag.客戶Id = new SelectList(db.客戶資料, "Id", "客戶名稱", 客戶聯絡人.客戶Id);
+            ViewBag.客戶Id = new SelectList(this.Repo客戶資料.All(), "Id", "客戶名稱", 客戶聯絡人.客戶Id);
             return View(客戶聯絡人);
         }
 
@@ -102,7 +100,7 @@ namespace HomeWork1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶聯絡人 客戶聯絡人 = db.客戶聯絡人.Find(id);
+            客戶聯絡人 客戶聯絡人 = this.Repo客戶聯絡人.Where(x => x.Id == id).FirstOrDefault();
             if (客戶聯絡人 == null)
             {
                 return HttpNotFound();
@@ -114,12 +112,12 @@ namespace HomeWork1.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
-        {            
-            客戶聯絡人 客戶聯絡人 = db.客戶聯絡人.Find(id);
+        {
+            客戶聯絡人 客戶聯絡人 = this.Repo客戶聯絡人.Where(x => x.Id == id).FirstOrDefault();
             客戶聯絡人.是否刪除 = true;
             try
             {
-                db.SaveChanges();
+                this.Repo客戶聯絡人.UnitOfWork.Commit();
             }
             catch (DbEntityValidationException ex)
             {
@@ -143,7 +141,7 @@ namespace HomeWork1.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                this.Repo客戶聯絡人.UnitOfWork.Context.Dispose();
             }
             base.Dispose(disposing);
         }

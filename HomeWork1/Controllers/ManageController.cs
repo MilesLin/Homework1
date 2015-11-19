@@ -11,7 +11,7 @@ using HomeWork1.Models;
 namespace HomeWork1.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController :BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
