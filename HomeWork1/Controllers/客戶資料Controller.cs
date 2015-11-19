@@ -23,6 +23,13 @@ namespace HomeWork1.Controllers
             return View(this.Repo客戶資料.Where(x => !x.是否刪除).ToList());
         }
 
+        [HttpPost]
+        public ActionResult Index(客戶分類 客戶分類)
+        {
+            var data = this.Repo客戶資料.Where(x => !x.是否刪除 && x.客戶分類 == 客戶分類);
+            return View(data);
+        }
+
         // GET: 客戶資料/Details/5
         public ActionResult Details(int? id)
         {
