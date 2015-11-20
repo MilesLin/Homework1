@@ -2,6 +2,9 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using HomeWork1.Models.ViewModels;
+using System.IO;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 	
 namespace HomeWork1.Models
 {   
@@ -44,6 +47,39 @@ namespace HomeWork1.Models
 
             return 客戶資料;
         }
+
+        public MemoryStream GetAllDetailExcel()
+        {
+            IWorkbook wb = new XSSFWorkbook();
+            ISheet ws = wb.CreateSheet();
+            ws.CreateRow(0);
+            ws.GetRow(0).CreateCell(0).SetCellValue("客戶分類");
+            ws.GetRow(0).CreateCell(1).SetCellValue("客戶名稱");
+            ws.GetRow(0).CreateCell(2).SetCellValue("統一編號");
+            ws.GetRow(0).CreateCell(3).SetCellValue("電話");
+            ws.GetRow(0).CreateCell(4).SetCellValue("傳真");
+            ws.GetRow(0).CreateCell(5).SetCellValue("地址");
+            ws.GetRow(0).CreateCell(6).SetCellValue("Email");
+            int index = 1;
+            foreach (var item in this.All())
+            {
+
+                ws.CreateRow(index);
+                ws.GetRow(index).CreateCell(0).SetCellValue(item.客戶分類.ToString());
+                ws.GetRow(index).CreateCell(1).SetCellValue(item.客戶名稱);
+                ws.GetRow(index).CreateCell(2).SetCellValue(item.統一編號);
+                ws.GetRow(index).CreateCell(3).SetCellValue(item.電話);
+                ws.GetRow(index).CreateCell(4).SetCellValue(item.傳真);
+                ws.GetRow(index).CreateCell(5).SetCellValue(item.地址);
+                ws.GetRow(index).CreateCell(6).SetCellValue(item.Email);
+                index++;
+            }
+
+            MemoryStream ms = new MemoryStream();
+            wb.Write(ms);
+            
+            return ms;
+        } 
 	}
 
 	public  interface I客戶資料Repository : IRepository<客戶資料>

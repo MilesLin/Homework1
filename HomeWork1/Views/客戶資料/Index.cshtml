@@ -34,6 +34,7 @@
     </table>
     @Html.EnumDropDownListFor(model => model.分類查詢)
     <input type="submit" value="搜尋"/>
+    @Html.ActionLink("下載Excel", "DownLoadExcel", "", htmlAttributes: new { @class = "btn btn-primary btn-large" })
 }
     <table class="table">
         <tr>
