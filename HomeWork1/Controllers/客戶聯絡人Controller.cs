@@ -15,7 +15,7 @@ namespace HomeWork1.Controllers
         // GET: 客戶聯絡人
         public ActionResult Index()
         {
-            var 客戶聯絡人 = this.Repo客戶聯絡人.All().Where(x => !x.是否刪除).Include("客戶資料").ToList();
+            var 客戶聯絡人 = this.Repo客戶聯絡人.All().Include("客戶資料").ToList();
             return View(客戶聯絡人);
         }
 

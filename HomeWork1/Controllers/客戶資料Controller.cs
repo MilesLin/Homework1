@@ -20,13 +20,13 @@ namespace HomeWork1.Controllers
         // GET: 客戶資料
         public ActionResult Index()
         {
-            return View(this.Repo客戶資料.Where(x => !x.是否刪除).ToList());
+            return View(this.Repo客戶資料.All().ToList());
         }
 
         [HttpPost]
         public ActionResult Index(客戶分類 客戶分類)
         {
-            var data = this.Repo客戶資料.Where(x => !x.是否刪除 && x.客戶分類 == 客戶分類);
+            var data = this.Repo客戶資料.All().Where(x => x.客戶分類 == 客戶分類);
             return View(data);
         }
 

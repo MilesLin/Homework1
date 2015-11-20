@@ -14,7 +14,7 @@ namespace HomeWork1.Controllers
         // GET: 客戶銀行資訊
         public ActionResult Index()
         {
-            var 客戶銀行資訊s = this.Repo客戶銀行資訊.Where(x => !x.是否刪除).Include("客戶資料").ToList();
+            var 客戶銀行資訊s = this.Repo客戶銀行資訊.All().Include("客戶資料").ToList();
 
             return View(客戶銀行資訊s);
         }
