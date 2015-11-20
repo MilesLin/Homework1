@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HomeWork1.Models;
+using HomeWork1.Models.ViewModels;
 
 namespace HomeWork1.Controllers
 {
@@ -20,14 +21,27 @@ namespace HomeWork1.Controllers
         // GET: 客戶資料
         public ActionResult Index()
         {
-            return View(this.Repo客戶資料.All().ToList());
+            客戶資料VM 客戶資料 = new 客戶資料VM();
+            客戶資料.客戶資料 = this.Repo客戶資料.All().ToList();
+            return View(客戶資料);
         }
 
         [HttpPost]
-        public ActionResult Index(客戶分類 客戶分類)
+        public ActionResult Index(客戶資料VM 客戶資料)
         {
-            var data = this.Repo客戶資料.All().Where(x => x.客戶分類 == 客戶分類);
-            return View(data);
+            if (客戶資料.分類查詢 != 客戶分類查詢.全部)
+            {
+                客戶分類 分類 = (客戶分類)客戶資料.分類查詢;
+                客戶資料.客戶資料 = this.Repo客戶資料.All().Where(x => x.客戶分類 == 分類).ToList();
+            }
+            else
+            {
+                客戶資料.客戶資料 = this.Repo客戶資料.All().ToList();
+            }
+            
+            客戶資料 = this.Repo客戶資料.OrderBy(客戶資料);
+
+            return View(客戶資料);
         }
 
         // GET: 客戶資料/Details/5

@@ -1,10 +1,10 @@
-﻿@model IEnumerable<HomeWork1.Models.客戶資料>
+﻿@model HomeWork1.Models.ViewModels.客戶資料VM
 
 @{
     ViewBag.Title = "客戶資料";
 }
 
-<h2>Index</h2>
+<h2>客戶資料</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,36 +12,56 @@
 
 @using (Html.BeginForm())
 {
-    @Html.EnumDropDownListFor(model => model.FirstOrDefault().客戶分類)
+    <table>
+        <tr>
+            <td>
+                @Html.Label("排序欄位：")
+                @Html.Label("客戶分類")
+                @Html.RadioButtonFor(x => x.排序欄位, (int)HomeWork1.Models.ViewModels.客戶資料排序欄位.客戶分類)
+                @Html.Label("客戶名稱")
+                @Html.RadioButtonFor(x => x.排序欄位, (int)HomeWork1.Models.ViewModels.客戶資料排序欄位.客戶名稱)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.Label("排序方式：")
+                @Html.Label("升冪")
+                @Html.RadioButtonFor(x => x.排序方式, (int)HomeWork1.Models.排序方式.升冪)
+                @Html.Label("降冪")
+                @Html.RadioButtonFor(x => x.排序方式, (int)HomeWork1.Models.排序方式.降冪)
+            </td>
+        </tr>
+    </table>
+    @Html.EnumDropDownListFor(model => model.分類查詢)
     <input type="submit" value="搜尋"/>
 }
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.客戶分類)
+                @Html.DisplayNameFor(model => model.客戶資料.FirstOrDefault().客戶分類)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.客戶名稱)
+                @Html.DisplayNameFor(model => model.客戶資料.FirstOrDefault().客戶名稱)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.統一編號)
+                @Html.DisplayNameFor(model => model.客戶資料.FirstOrDefault().統一編號)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.電話)
+                @Html.DisplayNameFor(model => model.客戶資料.FirstOrDefault().電話)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.傳真)
+                @Html.DisplayNameFor(model => model.客戶資料.FirstOrDefault().傳真)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.地址)
+                @Html.DisplayNameFor(model => model.客戶資料.FirstOrDefault().地址)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.客戶資料.FirstOrDefault().Email)
             </th>
             <th></th>
         </tr>
 
-        @foreach (var item in Model)
+        @foreach (var item in Model.客戶資料)
         {
             <tr>
                 <td>
