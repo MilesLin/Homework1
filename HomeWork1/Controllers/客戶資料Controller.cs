@@ -8,8 +8,12 @@ using System.Web;
 using System.Web.Mvc;
 using HomeWork1.Models;
 using HomeWork1.Models.ViewModels;
+using NPOI;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 
-namespace HomeWork1.Controllers
+using System.IO;namespace HomeWork1.Controllers
 {
     public class 客戶資料Controller : BaseController
     {
@@ -144,6 +148,15 @@ namespace HomeWork1.Controllers
             客戶資料.是否刪除 = true;
             this.Repo客戶資料.UnitOfWork.Commit();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult DownLoadExcel()
+        {
+            MemoryStream file = this.Repo客戶資料.GetAllDetailExcel();
+            return File(file.GetBuffer(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "客戶資料明細.xlsx");
+
+            // 為什麼第一個參數需要file.GetBuffer，如果第一個參數是file會出現 "無法存取關閉的資料流"
+            //return File(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "客戶資料明細.xlsx");
         }
 
         protected override void Dispose(bool disposing)
