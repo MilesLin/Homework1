@@ -13,9 +13,10 @@ using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using Omu.ValueInjecter;
-
 using System.IO;
 using HomeWork1.Models.Interface;
+using HomeWork1.ActionFilters;
+
 namespace HomeWork1.Controllers
 {
     public class 客戶資料Controller : BaseController
@@ -25,6 +26,7 @@ namespace HomeWork1.Controllers
             return View(this.Repo客戶總覽.All().ToList());
         }
 
+        [TimerFilter]
         // GET: 客戶資料
         public ActionResult Index()
         {
@@ -45,7 +47,7 @@ namespace HomeWork1.Controllers
             {
                 客戶資料.客戶資料 = this.Repo客戶資料.All().ToList();
             }
-            
+
             客戶資料 = this.Repo客戶資料.OrderBy(客戶資料);
 
             return View(客戶資料);
@@ -185,10 +187,10 @@ namespace HomeWork1.Controllers
             //return File(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "客戶資料明細.xlsx");
         }
 
-        [HandleError(ExceptionType = typeof(HttpException),View="Error")]
+        [HandleError(ExceptionType = typeof(HttpException), View = "Error")]
         public ActionResult MyErrorHandle()
         {
-            throw new HttpException("就是丟Exception就是了");            
+            throw new HttpException("就是丟Exception就是了");
         }
 
         protected override void Dispose(bool disposing)

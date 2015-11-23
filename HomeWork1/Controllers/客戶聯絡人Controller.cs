@@ -7,12 +7,14 @@ using System.Web;
 using System.Web.Mvc;
 using HomeWork1.Models;
 using System.Data.Entity.Validation;
+using HomeWork1.ActionFilters;
 
 namespace HomeWork1.Controllers
 {
     public class 客戶聯絡人Controller :BaseController
     {
         // GET: 客戶聯絡人
+        [TimerFilter]
         public ActionResult Index()
         {
             var 客戶聯絡人 = this.Repo客戶聯絡人.All().Include("客戶資料").ToList();
