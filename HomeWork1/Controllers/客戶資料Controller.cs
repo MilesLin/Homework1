@@ -21,6 +21,10 @@ namespace HomeWork1.Controllers
 {
     public class 客戶資料Controller : BaseController
     {
+        public ActionResult MyLayout()
+        {
+            return View();
+        }
         public ActionResult IndexSurface()
         {
             return View(this.Repo客戶總覽.All().ToList());
