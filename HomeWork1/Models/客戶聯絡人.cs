@@ -9,10 +9,11 @@
 
 namespace HomeWork1.Models
 {
+    using HomeWork1.Models.Interface;
     using System;
     using System.Collections.Generic;
-    
-    public partial class 客戶聯絡人
+
+    public partial class 客戶聯絡人 : I客戶聯絡人
     {
         public int Id { get; set; }
         public int 客戶Id { get; set; }

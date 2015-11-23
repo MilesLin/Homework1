@@ -12,8 +12,11 @@ using NPOI;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
+using Omu.ValueInjecter;
 
-using System.IO;namespace HomeWork1.Controllers
+using System.IO;
+using HomeWork1.Models.Interface;
+namespace HomeWork1.Controllers
 {
     public class 客戶資料Controller : BaseController
     {
@@ -62,6 +65,29 @@ using System.IO;namespace HomeWork1.Controllers
             {
                 return HttpNotFound();
             }
+            return View(客戶資料);
+        }
+
+        [HttpPost]
+        public ActionResult Details(int? id, FormCollection form)
+        {
+            IList<客戶聯絡人> details = new List<客戶聯絡人>();
+
+            //string [] includeProperties = {"Id","職稱","手機","電話"};
+
+            if (TryUpdateModel<IList<客戶聯絡人>>(details, "data"))
+            {
+                foreach (var item in details)
+                {
+                    var dbItem = this.Repo客戶聯絡人.Where(x => x.Id == item.Id).FirstOrDefault();
+                    dbItem.InjectFrom(item);
+                }
+
+                this.Repo客戶聯絡人.UnitOfWork.Commit();
+            }
+
+            客戶資料 客戶資料 = this.Repo客戶資料.Where(x => x.Id == id).FirstOrDefault();
+
             return View(客戶資料);
         }
 

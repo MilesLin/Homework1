@@ -66,6 +66,49 @@
 
     </dl>
 </div>
+
+@{
+    var data = Model.客戶聯絡人.ToArray();
+}
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <input type="submit" name="name" value="批次更新" />
+        @Html.HiddenFor(model => model.Id)
+        <table class="table">
+            <tr>
+                <th>職稱</th>
+                <th>姓名</th>
+                <th>手機</th>
+                <th>電話</th>
+            </tr>
+            @for (int i = 0; i < data.Length; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(modelItem => data[i].Id)
+                        @Html.HiddenFor(modelItem => data[i].客戶Id)
+                        @Html.HiddenFor(modelItem => data[i].Email)
+                        @Html.HiddenFor(modelItem => data[i].姓名)
+                        @Html.EditorFor(modelItem => data[i].職稱)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => data[i].姓名)
+                    </td>
+                    <td>
+                        @Html.EditorFor(modelItem => data[i].手機)
+                    </td>
+                    <td>
+                        @Html.EditorFor(modelItem => data[i].電話)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+    
+</div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
