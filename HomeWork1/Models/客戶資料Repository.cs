@@ -63,7 +63,6 @@ namespace HomeWork1.Models
             int index = 1;
             foreach (var item in this.All())
             {
-
                 ws.CreateRow(index);
                 ws.GetRow(index).CreateCell(0).SetCellValue(item.客戶分類.ToString());
                 ws.GetRow(index).CreateCell(1).SetCellValue(item.客戶名稱);
@@ -77,8 +76,19 @@ namespace HomeWork1.Models
 
             MemoryStream ms = new MemoryStream();
             wb.Write(ms);
+
+            var file = ms.ToArray();
+            var output = new MemoryStream();
+            output.Write(file, 0, file.Length);
+            output.Position = 0;
             
-            return ms;
+            // 為什麼無法直接回傳NPOI寫好的MemeroyStream，
+            // 是因為wb.Write(ms)，應該會在裡面執行ms.Close()，導致無法取得關閉的串流
+            //output.Close();
+            
+            return output;
+
+            //return ms;
         } 
 	}
 
