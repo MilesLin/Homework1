@@ -185,6 +185,12 @@ namespace HomeWork1.Controllers
             //return File(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "客戶資料明細.xlsx");
         }
 
+        [HandleError(ExceptionType = typeof(HttpException),View="Error")]
+        public ActionResult MyErrorHandle()
+        {
+            throw new HttpException("就是丟Exception就是了");            
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
