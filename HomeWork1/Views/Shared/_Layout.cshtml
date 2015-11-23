@@ -12,7 +12,8 @@
     <!-- start: Mobile Specific -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- end: Mobile Specific -->
-    <!-- start: CSS -->
+    <!-- start: CSS -->   
+    <link id="PagedList" href=" ~/Content/PagedList.css" rel="stylesheet">
     <link id="bootstrap-style" href="~/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link id="base-style" href="~/css/style.css" rel="stylesheet">
@@ -463,6 +464,8 @@
     <script src="~/js/retina.js"></script>
     <script src="~/js/custom.js"></script>
     <!-- end: JavaScript-->
+    @RenderSection("scripts", required: false)
+
 
 </body>
 </html>

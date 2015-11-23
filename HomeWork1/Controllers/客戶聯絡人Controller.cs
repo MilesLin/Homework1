@@ -8,6 +8,8 @@ using System.Web.Mvc;
 using HomeWork1.Models;
 using System.Data.Entity.Validation;
 using HomeWork1.ActionFilters;
+using PagedList.Mvc; //import this so we get our HTML Helper
+using PagedList; //import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)
 
 namespace HomeWork1.Controllers
 {
@@ -15,10 +17,10 @@ namespace HomeWork1.Controllers
     {
         // GET: 客戶聯絡人
         [TimerFilter]
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var 客戶聯絡人 = this.Repo客戶聯絡人.All().Include("客戶資料").ToList();
-            return View(客戶聯絡人);
+            return View(客戶聯絡人.ToPagedList(page ?? 1, 5));
         }
 
         // GET: 客戶聯絡人/Details/5
