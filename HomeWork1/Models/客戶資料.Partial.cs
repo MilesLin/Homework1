@@ -37,7 +37,12 @@ namespace HomeWork1.Models
         [EmailAddress]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-    
+
+        [UIHint("Map")]
+        public string 經度n { get; set; }
+
+        public string 緯度n { get; set; }
+
         public virtual ICollection<客戶銀行資訊> 客戶銀行資訊 { get; set; }
         public virtual ICollection<客戶聯絡人> 客戶聯絡人 { get; set; }
     }

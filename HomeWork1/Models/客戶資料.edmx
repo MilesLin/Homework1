@@ -28,6 +28,10 @@
           <Property Name="Email" Type="nvarchar" MaxLength="250" />
           <Property Name="是否刪除" Type="bit" Nullable="false" />
           <Property Name="客戶分類" Type="tinyint" Nullable="false" />
+          <Property Name="經度" Type="geography" />
+          <Property Name="緯度" Type="geography" />
+          <Property Name="經度n" Type="nvarchar" MaxLength="100" />
+          <Property Name="緯度n" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="客戶銀行資訊">
           <Key>
@@ -142,6 +146,10 @@
           <NavigationProperty Name="客戶聯絡人" Relationship="Self.FK_客戶聯絡人_客戶資料" FromRole="客戶資料" ToRole="客戶聯絡人" />
           <Property Name="是否刪除" Type="Boolean" Nullable="false" />
           <Property Name="客戶分類" Type="客戶資料Model.客戶分類" Nullable="false" />
+          <Property Name="經度" Type="Geography" />
+          <Property Name="緯度" Type="Geography" />
+          <Property Name="經度n" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="緯度n" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="客戶銀行資訊">
           <Key>
@@ -245,6 +253,10 @@
           <EntitySetMapping Name="客戶資料">
             <EntityTypeMapping TypeName="客戶資料Model.客戶資料">
               <MappingFragment StoreEntitySet="客戶資料">
+                <ScalarProperty Name="緯度n" ColumnName="緯度n" />
+                <ScalarProperty Name="經度n" ColumnName="經度n" />
+                <ScalarProperty Name="緯度" ColumnName="緯度" />
+                <ScalarProperty Name="經度" ColumnName="經度" />
                 <ScalarProperty Name="客戶分類" ColumnName="客戶分類" />
                 <ScalarProperty Name="是否刪除" ColumnName="是否刪除" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

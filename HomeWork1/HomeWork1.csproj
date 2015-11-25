@@ -280,6 +280,11 @@
     <Compile Include="Models\客戶資料.Partial.cs">
       <DependentUpon>EFGeneratePartialClass.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\客戶資料1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>客戶資料.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\客戶資料Repository.cs">
       <DependentUpon>IRepository.tt</DependentUpon>
     </Compile>
@@ -571,9 +576,12 @@
     <Content Include="Views\客戶銀行資訊\Index.cshtml" />
     <Content Include="Views\客戶資料\IndexSurface.cshtml" />
     <Content Include="Views\客戶資料\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout - Copy.cshtml" />
+    <Content Include="Views\Shared\_OldLayout.cshtml" />
     <Content Include="Views\客戶資料\_BatchUpdate.cshtml" />
     <Content Include="Views\客戶資料\DetailMaster.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Map.cshtml" />
+    <Content Include="Views\客戶資料\TestMap.cshtml" />
+    <Content Include="Views\客戶資料\TestMapWithLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -584,6 +592,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
