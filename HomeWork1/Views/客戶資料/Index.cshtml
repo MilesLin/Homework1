@@ -32,9 +32,9 @@
             </td>
         </tr>
     </table>
-    @Html.EnumDropDownListFor(model => model.分類查詢)
+    @Html.EnumDropDownListFor(model => model.分類查詢, new { onchange = "this.form.submit();" })
     <input type="submit" value="搜尋"/>
-    @Html.ActionLink("下載Excel", "DownLoadExcel", "", htmlAttributes: new { @class = "btn btn-primary btn-large" })
+    @Html.ActionLink("下載Excel", "DownLoadExcel", null, htmlAttributes: new { @class = "btn btn-primary btn-large" })
 }
     <table class="table">
         <tr>
