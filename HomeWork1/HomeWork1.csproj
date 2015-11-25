@@ -572,7 +572,8 @@
     <Content Include="Views\客戶資料\IndexSurface.cshtml" />
     <Content Include="Views\客戶資料\Error.cshtml" />
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
-    <Content Include="Views\客戶資料\MyLayout.cshtml" />
+    <Content Include="Views\客戶資料\_BatchUpdate.cshtml" />
+    <Content Include="Views\客戶資料\DetailMaster.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

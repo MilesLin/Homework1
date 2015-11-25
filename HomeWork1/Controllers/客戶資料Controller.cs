@@ -21,10 +21,6 @@ namespace HomeWork1.Controllers
 {
     public class 客戶資料Controller : BaseController
     {
-        public ActionResult MyLayout()
-        {
-            return View();
-        }
         public ActionResult IndexSurface()
         {
             return View(this.Repo客戶總覽.All().ToList());
@@ -57,9 +53,26 @@ namespace HomeWork1.Controllers
             return View(客戶資料);
         }
 
+        public ActionResult DetailMaster(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            客戶資料 客戶資料 = this.Repo客戶資料.Where(x => x.Id == id).FirstOrDefault();
+
+            if (客戶資料 == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(客戶資料);
+        }
+
         // GET: 客戶資料/Details/5
         public ActionResult Details(int? id)
-        {
+        {            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
