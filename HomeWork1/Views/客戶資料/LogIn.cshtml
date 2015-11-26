@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "LogIn";
+}
+
+<h2>登入畫面</h2>
+
+@if (ViewBag.Fail != null)
+{
+    <p>@ViewBag.Fail</p>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.Label("帳號:")
+    @Html.TextBox("帳號")
+    <br />
+    @Html.Label("密碼:")
+    @Html.Password("密碼")
+    <br />
+    <input type="submit" class="button-login" value="登入" />
+}
+

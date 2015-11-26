@@ -95,18 +95,34 @@ namespace HomeWork1.Models
 
         public override void Add(客戶資料 entity)
         {
+            
+            entity.密碼 = this.Hash256(entity.密碼);
+
+            base.Add(entity);
+        }
+
+        public bool 驗證帳號密碼(string 帳號, string 密碼) 
+        { 
+
+            string hashed密碼 = this.Hash256(密碼);
+
+            var isVerified = this.Where(x => x.帳號.Equals(帳號) && x.密碼.Equals(hashed密碼)).Any();
+
+            return isVerified;
+        }
+        
+        private string Hash256(string str) 
+        {
             //加密密碼
             SHA256 sha256 = new SHA256CryptoServiceProvider();//建立一個SHA256
 
-            byte[] source = Encoding.Default.GetBytes(entity.密碼);//將字串轉為Byte[]
+            byte[] source = Encoding.Default.GetBytes(str);//將字串轉為Byte[]
 
             byte[] crypto = sha256.ComputeHash(source);//進行SHA256加密
 
             string hashedPassword = Convert.ToBase64String(crypto);//把加密後的字串從Byte[]轉為字串
 
-            entity.密碼 = hashedPassword;
-
-            base.Add(entity);
+            return hashedPassword;
         }
 	}
 

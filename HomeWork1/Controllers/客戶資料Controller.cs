@@ -16,6 +16,7 @@ using Omu.ValueInjecter;
 using System.IO;
 using HomeWork1.Models.Interface;
 using HomeWork1.ActionFilters;
+using System.Web.Security;
 
 namespace HomeWork1.Controllers
 {
@@ -48,6 +49,26 @@ namespace HomeWork1.Controllers
             客戶資料VM 客戶資料 = new 客戶資料VM();
             客戶資料.客戶資料 = this.Repo客戶資料.All().ToList();
             return View(客戶資料);
+        }
+
+        public ActionResult LogIn()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult LogIn(string 帳號, string 密碼)
+        {
+            if (this.Repo客戶資料.驗證帳號密碼(帳號,密碼))
+            {
+                FormsAuthentication.RedirectFromLoginPage(帳號, false);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.Fail = "驗證失敗";
+                return View();
+            }            
         }
 
         [HttpPost]

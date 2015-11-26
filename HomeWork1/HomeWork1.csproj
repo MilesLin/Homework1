@@ -582,6 +582,7 @@
     <Content Include="Views\Shared\DisplayTemplates\Map.cshtml" />
     <Content Include="Views\客戶資料\TestMap.cshtml" />
     <Content Include="Views\客戶資料\TestMapWithLayout.cshtml" />
+    <Content Include="Views\客戶資料\LogIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
