@@ -43,6 +43,13 @@ namespace HomeWork1.Models
 
         public string 緯度n { get; set; }
 
+        [Required]
+        public string 帳號 { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string 密碼 { get; set; }
+
         public virtual ICollection<客戶銀行資訊> 客戶銀行資訊 { get; set; }
         public virtual ICollection<客戶聯絡人> 客戶聯絡人 { get; set; }
     }

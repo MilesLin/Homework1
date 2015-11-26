@@ -5,6 +5,8 @@ using HomeWork1.Models.ViewModels;
 using System.IO;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
+using System.Security.Cryptography;
+using System.Text;
 	
 namespace HomeWork1.Models
 {   
@@ -89,7 +91,23 @@ namespace HomeWork1.Models
             return output;
 
             //return ms;
-        } 
+        }
+
+        public override void Add(客戶資料 entity)
+        {
+            //加密密碼
+            SHA256 sha256 = new SHA256CryptoServiceProvider();//建立一個SHA256
+
+            byte[] source = Encoding.Default.GetBytes(entity.密碼);//將字串轉為Byte[]
+
+            byte[] crypto = sha256.ComputeHash(source);//進行SHA256加密
+
+            string hashedPassword = Convert.ToBase64String(crypto);//把加密後的字串從Byte[]轉為字串
+
+            entity.密碼 = hashedPassword;
+
+            base.Add(entity);
+        }
 	}
 
 	public  interface I客戶資料Repository : IRepository<客戶資料>

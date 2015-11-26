@@ -32,7 +32,7 @@ namespace HomeWork1.Models
 			return ObjectSet.Where(expression);
 		}
 
-		public void Add(T entity)
+		public virtual void Add(T entity)
 		{
 			ObjectSet.Add(entity);
 		}
