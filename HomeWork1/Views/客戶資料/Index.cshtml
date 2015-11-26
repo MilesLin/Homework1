@@ -4,6 +4,11 @@
     ViewBag.Title = "客戶資料";
 }
 
+@using (Html.BeginForm("LogOut", "客戶資料"))
+{
+    <input type="submit" value="登出" />
+}
+
 <h2>客戶資料</h2>
 
 <p>
@@ -12,7 +17,7 @@
 
 @using (Html.BeginForm())
 {
-    <table>
+    <table>        
         <tr>
             <td>
                 @Html.Label("排序欄位：")

@@ -39,7 +39,14 @@ namespace HomeWork1.Controllers
             客戶資料VM 客戶資料 = new 客戶資料VM();
             客戶資料.客戶資料 = this.Repo客戶資料.All().ToList();
             return View(客戶資料);
-        }        
+        }
+
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+
+            return RedirectToAction("IndexSurface");            
+        }
 
         public ActionResult LogIn()
         {
