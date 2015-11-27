@@ -1,5 +1,21 @@
 ﻿@model Map
+@{
+    string latitude = string.Empty;
+    string longitude = string.Empty;
 
+    if (string.IsNullOrEmpty(Model.Latitude))
+    {
+        latitude = "25.045792240303445";
+        longitude = "121.57719612121582";
+    }
+    else
+    {
+        latitude = Model.Latitude;
+        longitude = Model.Longitude;
+    }
+    
+    
+}
 <style>
     #map {
         width: 600px;
@@ -7,8 +23,8 @@
     }
 </style>
 <h4>地圖</h4>
-<span>經度:</span><input type="text" name="Map.Latitude" id="lat" readonly="readonly" value="@Model.Latitude">
-<span>緯度:</span><input type="text" name="Map.Longitude" id="lng" readonly="readonly" value="@Model.Longitude">
+<span>經度:</span><input type="text" name="Map.Latitude" id="lat" readonly="readonly" value="@latitude">
+<span>緯度:</span><input type="text" name="Map.Longitude" id="lng" readonly="readonly" value="@longitude">
 <hr />
 <div id="map"></div>
 
@@ -24,12 +40,12 @@
     function initMap() {
 
         //The center location of our map.
-        var centerOfMap = new google.maps.LatLng(@Model.Latitude, @Model.Longitude);
+        var centerOfMap = new google.maps.LatLng(@latitude, @longitude);
 
         //Map options.
         var options = {
             center: centerOfMap, //Set center.
-            zoom: 7 //The zoom value.
+            zoom: 12 //The zoom value.
         };
 
         //Create the map object.

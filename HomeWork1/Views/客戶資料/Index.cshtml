@@ -4,6 +4,13 @@
     ViewBag.Title = "客戶資料";
 }
 
+@section breadcrumb{
+    <li>
+        <i class="icon-home"></i>
+        <a href="#">客戶資料</a>
+    </li>
+}
+
 @using (Html.BeginForm("LogOut", "客戶資料"))
 {
     <input type="submit" value="登出" />
