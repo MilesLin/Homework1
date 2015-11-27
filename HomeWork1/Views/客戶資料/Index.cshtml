@@ -63,10 +63,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.客戶資料.FirstOrDefault().Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.客戶資料.FirstOrDefault().經度n)
-            </th>
+            </th>            
             <th></th>
         </tr>
 
@@ -93,9 +90,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.經度n)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

@@ -186,7 +186,8 @@ namespace HomeWork1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶資料 客戶資料 = this.Repo客戶資料.Where(x => x.Id == id).FirstOrDefault();
+
+            Edit客戶資料VM 客戶資料 = this.Repo客戶資料.GetEditVM(id.Value);
 
             if (客戶資料 == null)
             {
@@ -202,16 +203,17 @@ namespace HomeWork1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(FormCollection from, int? id)
         {
-            var data = this.Repo客戶資料.Where(x => x.Id == id).FirstOrDefault();
+            //var data = this.Repo客戶資料.Where(x => x.Id == id).FirstOrDefault();
+            Edit客戶資料VM editData = new Edit客戶資料VM();
 
-            string[] includePropertie = { "客戶名稱", "統一編號", "電話", "傳真", "地址", "Email", "客戶分類" };
-            if (TryUpdateModel<客戶資料>(data, includePropertie))
+            //string[] includePropertie = { "客戶名稱", "統一編號", "電話", "傳真", "地址", "Email", "客戶分類" };
+            if (TryUpdateModel<Edit客戶資料VM>(editData))
             {
-                this.Repo客戶資料.UnitOfWork.Commit();
+                this.Repo客戶資料.SaveEdit客戶資料VM(editData);
                 return RedirectToAction("Index");
             }
 
-            return View(data);
+            return View(editData);
         }
 
         // GET: 客戶資料/Delete/5

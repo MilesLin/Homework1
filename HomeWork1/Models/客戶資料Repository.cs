@@ -7,6 +7,7 @@ using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System.Security.Cryptography;
 using System.Text;
+using Omu.ValueInjecter;
 	
 namespace HomeWork1.Models
 {   
@@ -48,6 +49,31 @@ namespace HomeWork1.Models
             }
 
             return 客戶資料;
+        }
+
+        public Edit客戶資料VM GetEditVM(int id) 
+        {
+            Edit客戶資料VM editVM = new Edit客戶資料VM();
+            var dbData = this.Where(x => x.Id == id).FirstOrDefault();
+
+            editVM.InjectFrom(dbData);
+
+            editVM.Map.Latitude = dbData.經度n;
+            editVM.Map.Longitude = dbData.緯度n;
+
+            return editVM;
+        }
+
+        public void SaveEdit客戶資料VM(Edit客戶資料VM data) 
+        {
+            var 客戶資料 = this.Where(x => x.Id == data.Id).FirstOrDefault();
+
+            客戶資料.InjectFrom(data);
+
+            客戶資料.經度n = data.Map.Latitude;
+            客戶資料.緯度n = data.Map.Longitude;
+
+            this.UnitOfWork.Commit();
         }
 
         public MemoryStream GetAllDetailExcel()

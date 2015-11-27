@@ -227,6 +227,7 @@
       <DependentUpon>IRepository.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Map.cs" />
     <Compile Include="Models\RepositoryHelper.cs">
       <DependentUpon>IRepository.tt</DependentUpon>
     </Compile>
@@ -242,6 +243,7 @@
     <Compile Include="Models\sysdiagramsRepository.cs">
       <DependentUpon>IRepository.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\Edit客戶資料VM.cs" />
     <Compile Include="Models\ViewModels\客戶資料VM.cs" />
     <Compile Include="Models\ViewModels\客戶資料排序欄位.cs" />
     <Compile Include="Models\客戶分類.cs">
@@ -584,6 +586,7 @@
     <Content Include="Views\客戶資料\TestMap.cshtml" />
     <Content Include="Views\客戶資料\TestMapWithLayout.cshtml" />
     <Content Include="Views\客戶資料\LogIn.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Map.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -595,9 +598,7 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Shared\EditorTemplates\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -37,16 +37,13 @@ namespace HomeWork1.Models
         [EmailAddress]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-
-        [UIHint("Map")]
+        
         public string 經度n { get; set; }
 
         public string 緯度n { get; set; }
 
-        [Required]
         public string 帳號 { get; set; }
 
-        [Required]
         [DataType(DataType.Password)]
         public string 密碼 { get; set; }
 

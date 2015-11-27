@@ -1,4 +1,4 @@
-﻿@model HomeWork1.Models.客戶資料
+﻿@model Edit客戶資料VM
 
 @{
     ViewBag.Title = "Edit";
@@ -73,6 +73,11 @@
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
+        
+        <div >
+            @Html.EditorFor(model => model.Map)
+        </div>
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
